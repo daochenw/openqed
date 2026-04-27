@@ -64,6 +64,25 @@
     li + li {
       margin-top: 0.5em;
     }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: '›';
+      display: inline-block;
+      margin-left: 0.25em;
+      font-size: 1.2em;
+      color: #999;
+      font-weight: 400;
+      transition: transform 0.2s ease;
+    }
+    details[open] > summary::after {
+      transform: rotate(90deg);
+    }
     @media (max-width: 768px) {
       .content {
         width: 88%;
@@ -91,7 +110,8 @@
 
     <br><br>
 
-    <strong>The explanation</strong>
+    <details>
+    <summary><strong>Reveal explanation</strong></summary>
 
     <br>
 
@@ -148,7 +168,8 @@
       <!-- <li>Cooper pair formation + long-range phase coherence are both necessary, and logically independent of one another.</li> -->
       <!-- <li></li> -->
     </ol>
-  
+    </details>
+
   </div>
 </body>
 </html>
