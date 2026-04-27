@@ -6,12 +6,35 @@
   <title>openqed</title>
   <script>
     MathJax = {
+      loader: { load: ['[tex]/mathtools'] },
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
+        processEscapes: true,
+        packages: { '[+]': ['mathtools'] },
+        macros: {
+          phat: '{\\mathbf{\\hat{p}}}',
+          bfJ: '{\\mathbf{J}}',
+          bfj: '{\\mathbf{j}}',
+          bfA: '{\\mathbf{A}}',
+          bfnhat: '{\\mathbf{\\hat{n}}}'
+        }
+      },
+      startup: {
+        pageReady() {
+          return MathJax.startup.defaultPageReady().then(() => {
+            const y = sessionStorage.getItem('scrollY');
+            if (y !== null) window.scrollTo(0, parseFloat(y));
+          });
+        }
       }
     };
+  </script>
+  <script>
+    history.scrollRestoration = 'manual';
+    addEventListener('beforeunload', () => {
+      sessionStorage.setItem('scrollY', window.scrollY);
+    });
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
@@ -50,12 +73,81 @@
 </head>
 <body>
   <div class="content">
-    <h1>High-Tc Superconductors</h1>
+    <h1>Meissner effect</h1>
+
+    <strong>Based on The Feynman Lectures on Physics, Volume III, Lecture 21</strong>
+
+    <br><br>
+
+    <strong>The effect</strong>
+
+    <div style="margin-bottom: 1em;"></div>
+
+    &ldquo;If you have a piece of metal at a high temperature (so that it is a normal conductor) and establish a magnetic field through it, and then you lower the temperature below the critical temperature (where the metal becomes a superconductor), <em>the field is expelled</em>.&rdquo;
+    
+    <br><br>
+
+    Assume the piece of metal is in a lump, i.e., simply connected.
+
+    <br><br>
+
+    <strong>The explanation</strong>
+
+    <br>
+
     <ol>
-      <li>Need for high pressure is only to keep the atoms in a certain configuration and not intrinsically quantum mechanical. </li>
-      <li>Cooper pair formation + long-range phase coherence are both necessary, and logically independent of one another.</li>
+    <li>We start with the Schrödinger equation for the state $\psi$ of a particle with charge $q$ and mass $m$ moving in an electromagnetic field $(\bfA,\phi)$:
+    $$ - \frac{\hbar}{i} \frac{\partial\psi}{\partial t} = \frac{1}{2m}\bigl(\phat - q \textbf{A}\bigr) \cdot \bigl(\phat - q \textbf{A}\bigr) \psi + q\phi \psi,$$
+  where $\phat \coloneqq \frac{\hbar}{i}\nabla$.
+
+    <br>
+
+    Using the above, we find that the probability density $P \coloneqq \psi^* \psi$ is locally converved, with associated curren
+
+    $$\bfJ \coloneqq \frac{1}{2}\biggl( \psi^* \biggl(\frac{\phat- q \bfA}{m} \biggr) \psi  + \psi \biggl(\frac{\phat-q \bfA}{m}\biggr)^*\psi^*\biggr).$$
+
+    This means that 
+
+    $$ \frac{\partial P}{\partial t} = - \nabla \cdot \bfJ.$$
+  
+    Writing $\psi = \sqrt{P} \cdot e^{i\theta}$, we can do a little algebra to express $\bfJ$ as
+
+    $$\bfJ = \frac{\hbar}{m} \Bigl( \nabla \theta - \frac{q}{\hbar} \bfA \Bigr) P.$$
+
+    </li>
+    
+    <li><em>Macroscopic wavefunction.</em> Below the critical temperature, electrons form pairs that <em>all</em> occupy the same lowest-energy state $\psi$, which is possible because each pair is a boson. In this scenario, the charge density $\rho$ is proportional to the probability density $P$, and the current density $\bfj$ is proportional to $\bfJ$. The constant of proportionality in both cases is the total charge in the metal. So the last equation implies
+      $$\bfj = \frac{\hbar}{m} \Bigl( \nabla \theta - \frac{q}{\hbar} \bfA \Bigr) \rho.$$
+    </li>
+
+    <li>In the final steady state, physics dictates that $\rho$ is constant in space and time. Let's work in the gauge so that $\nabla \cdot \bfA = 0$ inside the metal and $\bfnhat \cdot \bfA = 0$ on its boundary. <!-- see, e.g., https://math.stackexchange.com/questions/3214541/necessary-and-sufficient-conditions-for-the-solution-of-neumann-problem-->
+      Then the last displayed equation gives $\nabla^2 \theta = 0$ inside the metal and $\bfnhat \cdot \nabla \theta = 0$ on its boundary. 
+      We know that $\psi$ must be smooth inside the metal. But <em>because the metal is in a lump</em>, we may also choose $\theta$ such that it is also smooth inside the metal. Then, we can apply vector calculus to deduce
+      $$\int_V \nabla \cdot(\theta \nabla \theta) \, \mathrm{d}V = \int_V |\nabla\theta|^2 \mathrm{d}V + \int_V \theta \nabla^2 \theta \, \mathrm{d}V = \int_V |\nabla\theta|^2 \mathrm{d}V,$$
+      and
+      $$\int_V \nabla \cdot(\theta \nabla \theta) \, \mathrm{d}V = \int_S \theta (\bfnhat \cdot \nabla \theta) \, \mathrm{d}S = 0.$$
+      So $\nabla \theta = 0$ must be zero everywhere inside the metal. Therefore,
+      $$\bfj = -\frac{\rho q}{m} \bfA.$$
+    </li>
+
+    <li>
+      Now classical electromagnetism (Maxwell's equations) imposes
+      $$\nabla^2 \bfA = - \frac{1}{\epsilon_0 c^2} \bfj.$$
+      Combining the last two equations gives
+      $$\nabla^2 \bfA = \lambda^2 \bfA,$$
+      where $\lambda \coloneqq (\rho \, \frac{q}{\epsilon_0 mc^2})^{1/2}$. 
+      
+      <br>
+      
+      The solution to the last equation decays with the distance $d$ into the material as $\exp(-\lambda d)$. The characteristic length scale of penetration is therefore $1/\lambda$.
+      </li>
+    </li>
+
+    <!-- <li>Need for high pressure is only to keep the atoms in a certain configuration and not intrinsically quantum mechanical. </li> -->
+      <!-- <li>Cooper pair formation + long-range phase coherence are both necessary, and logically independent of one another.</li> -->
       <!-- <li></li> -->
     </ol>
+  
   </div>
 </body>
 </html>
