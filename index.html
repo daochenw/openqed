@@ -121,7 +121,9 @@
 
       In the final steady state, physics dictates that $\rho$ is constant in space and time. Let's work in the gauge such that $\nabla \cdot \bfA = 0$ inside the metal and $\bfnhat \cdot \bfA = 0$ on its boundary. <!-- see, e.g., https://math.stackexchange.com/questions/3214541/necessary-and-sufficient-conditions-for-the-solution-of-neumann-problem-->
       Then the last displayed equation gives $\nabla^2 \theta = 0$ inside the metal and $\bfnhat \cdot \nabla \theta = 0$ on its boundary. 
-      Physics dictates that $\psi$ must be smooth inside the metal. But <em>because the metal is in a lump</em>, we can also choose $\theta$ such that it is also smooth inside the metal. Then, we can apply vector calculus to deduce
+    </li>
+    <li>
+      Physics also dictates that $\psi$ must be smooth inside the metal. But <em>because the metal is in a lump</em>, we can also choose $\theta$ such that it is also smooth inside the metal. Then, we can apply vector calculus to deduce
       $$\int_V \nabla \cdot(\theta \nabla \theta) \, \mathrm{d}V = \int_V |\nabla\theta|^2 \mathrm{d}V + \int_V \theta \nabla^2 \theta \, \mathrm{d}V = \int_V |\nabla\theta|^2 \mathrm{d}V,$$
       and
       $$\int_V \nabla \cdot(\theta \nabla \theta) \, \mathrm{d}V = \int_S \theta (\bfnhat \cdot \nabla \theta) \, \mathrm{d}S = 0.$$
