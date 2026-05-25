@@ -125,21 +125,13 @@
     <summary>Explanation</summary>
 
     <ol>
-    <li><em>Quantum mechanics.</em> We start with the Schrödinger equation for the state $\psi$ of a particle with charge $q$ and mass $m$ moving in an electromagnetic field $(\bfA,\phi)$:
-    $$ - \frac{\hbar}{i} \frac{\partial\psi}{\partial t} = \frac{1}{2m}\bigl(\phat - q \textbf{A}\bigr) \cdot \bigl(\phat - q \textbf{A}\bigr) \psi + q\phi \psi,$$
-  where $\phat \coloneqq \frac{\hbar}{i}\nabla$.
-
-    <br>
-
-    Using the above, we find that the probability density $P \coloneqq \psi^* \psi$ is locally conserved, with associated current
+    <li><em>Quantum mechanics.</em> We start with the Schrödinger equation for the state $\psi$ of a particle with charge $q$ and mass $m$ moving in an electromagnetic field $(\bfA,\phi)$. Writing $\phat \coloneqq \frac{\hbar}{i}\nabla$, the equation is
+    $$ - \frac{\hbar}{i} \frac{\partial\psi}{\partial t} = \frac{1}{2m}\bigl(\phat - q \textbf{A}\bigr) \cdot \bigl(\phat - q \textbf{A}\bigr) \psi + q\phi \psi.$$
+   From this, we find that the probability density $P \coloneqq \psi^* \psi$ is locally conserved, with associated current
 
     $$\bfJ \coloneqq \frac{1}{2}\biggl( \psi^* \biggl(\frac{\phat- q \bfA}{m} \biggr) \psi  + \psi \biggl(\frac{\phat-q \bfA}{m}\biggr)^*\psi^*\biggr).$$
-
-    This means that 
-
-    $$ \frac{\partial P}{\partial t} = - \nabla \cdot \bfJ.$$
   
-    Writing $\psi = \sqrt{P} \cdot e^{i\theta}$, we can do a little algebra to express $\bfJ$ as
+    Writing $\psi = \sqrt{P} \cdot e^{i\theta}$, a little algebra gives
 
     $$\bfJ = \frac{\hbar}{m} \Bigl( \nabla \theta - \frac{q}{\hbar} \bfA \Bigr) P.$$
 
