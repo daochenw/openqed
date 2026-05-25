@@ -18,6 +18,8 @@
           bfJ: '{\\mathbf{J}}',
           bfj: '{\\mathbf{j}}',
           bfA: '{\\mathbf{A}}',
+          bfB: '{\\mathbf{B}}',
+          bfE: '{\\mathbf{E}}',
           bfnhat: '{\\mathbf{\\hat{n}}}'
         }
       },
@@ -101,7 +103,7 @@
   <div class="content">
     <h1>Superconductivity</h1>
 
-    Based on The Feynman Lectures on Physics, Volume III, Lecture 21
+    Notes on The Feynman Lectures on Physics, Volume III, Lecture 21
 
     <br><br>
 
@@ -109,7 +111,7 @@
 
     <div style="margin-bottom: 1em;"></div>
 
-    Normally, it is easy to establish a magnetic field through a metal. However, when the metal is in a lump and cooled below its critical temperature, the field is expelled.
+    Normally, it is easy to establish a magnetic field through a metal. However, when the metal is cooled below its critical temperature, the field is expelled.
 
     <!-- &ldquo;If you have a piece of metal at a high temperature (so that it is a normal conductor) and establish a magnetic field through it, and then you lower the temperature below the critical temperature (where the metal becomes a superconductor), <em>the field is expelled</em>.&rdquo; -->
     
@@ -119,8 +121,8 @@
 
     <br><br>
 
-    <details>
-    <summary>Reveal explanation</summary>
+    <!-- <details> -->
+    <summary>Explanation</summary>
 
     <ol>
     <li><em>Quantum mechanics.</em> We start with the Schrödinger equation for the state $\psi$ of a particle with charge $q$ and mass $m$ moving in an electromagnetic field $(\bfA,\phi)$:
@@ -146,10 +148,23 @@
     <li><em>Macroscopic wavefunction.</em> Below the critical temperature, electrons form pairs that <em>all</em> occupy the same lowest-energy state $\psi$, which is possible because each pair is a boson. In this scenario, the charge density $\rho$ is proportional to the probability density $P$, and the current density $\bfj$ is proportional to $\bfJ$. The constant of proportionality in both cases is the total charge in the metal. So the last equation implies
       $$\bfj = \frac{\hbar}{m} \Bigl( \nabla \theta - \frac{q}{\hbar} \bfA \Bigr) \rho.$$
 
-      In the final steady state, physics dictates that $\rho$ is constant in space and time. Let's work in the gauge such that $\nabla \cdot \bfA = 0$ inside the metal and $\bfnhat \cdot \bfA = 0$ on its boundary. <!-- see, e.g., https://math.stackexchange.com/questions/3214541/necessary-and-sufficient-conditions-for-the-solution-of-neumann-problem-->
-      Then the last displayed equation gives $\nabla^2 \theta = 0$ inside the metal and $\bfnhat \cdot \nabla \theta = 0$ on its boundary. 
+     
+      
+      <!-- Let's work in the gauge such that $\nabla \cdot \bfA = 0$ inside the metal and $\bfnhat \cdot \bfA = 0$ on its boundary.  -->
+      <!-- see, e.g., https://math.stackexchange.com/questions/3214541/necessary-and-sufficient-conditions-for-the-solution-of-neumann-problem-->
+      <!-- Then the last displayed equation gives $\nabla^2 \theta = 0$ inside the metal and $\bfnhat \cdot \nabla \theta = 0$ on its boundary.  -->
     </li>
-    <li>
+
+    <li> <em>Field expulsion.</em> In the final steady state, physics dictates that $\rho$ and $\bfE$ are constant in space. Taking the curl of the last equation gives 
+      $$\nabla \times \bfj = -\frac{q\rho}{m}\bfB.$$
+    Taking the curl of Ampere's equation and combining with the preceding equation gives 
+      $$\nabla^2 \bfB = \lambda^2 \bfB,$$
+    where $\lambda \coloneqq \sqrt{\mu_0 q \rho/m}$. 
+    
+    The solution to this equation decays exponentially with the distance $d$ into the material as $\exp(-\lambda d)$; so the characteristic penetration depth is $1/\lambda$.
+  
+    </li>
+    <!-- <li>
       <em>Constant $\theta$.</em> Physics also dictates that $\psi$ must be smooth inside the metal. But <em>because the metal is in a lump</em>, we can choose $\theta$ such that it is smooth inside the metal. Then, we can apply vector calculus to deduce
       $$\int_V \nabla \cdot(\theta \nabla \theta) \, \mathrm{d}V = \int_V |\nabla\theta|^2 \mathrm{d}V + \int_V \theta \nabla^2 \theta \, \mathrm{d}V = \int_V |\nabla\theta|^2 \mathrm{d}V,$$
       and
@@ -169,17 +184,17 @@
       
       The solution to the last equation decays with the distance $d$ into the material as $\exp(-\lambda d)$. The characteristic length scale of penetration is therefore $1/\lambda$.
       </li>
-    </li>
-
-    <!-- <li>Need for high pressure is only to keep the atoms in a certain configuration and not intrinsically quantum mechanical. </li> -->
-      <!-- <li>Cooper pair formation + long-range phase coherence are both necessary, and logically independent of one another.</li> -->
-      <!-- <li></li> -->
+    </li> -->
     </ol>
-    </details>
+    <!-- </details> -->
 
-    <!-- <br> -->
-    <!-- <h2>Flux quantization</h2> -->
+    <br>
+    <h2>Flux quantization</h2>
 
+    Take a ring-shaped metal and establish a magnetic field through it. When the metal is cooled below its critical temperature, the magnetic flux through the ring is quantized. 
+
+    <!-- <br>
+    <h2>Josephson effect</h2> -->
   </div>
 </body>
 </html>
