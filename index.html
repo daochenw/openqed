@@ -191,5 +191,29 @@
     <!-- <br><br>
     <h2>Josephson effect</h2> -->
   </div>
+  <script>
+    document.querySelectorAll('details').forEach(details => {
+      const summary = details.querySelector('summary');
+      const wrapper = document.createElement('div');
+      wrapper.className = 'details-content';
+      while (summary.nextSibling) wrapper.appendChild(summary.nextSibling);
+      details.appendChild(wrapper);
+
+      summary.addEventListener('click', e => {
+        if (!details.open) return;            // opening: keep native instant behavior
+        e.preventDefault();                   // closing: animate the unroll
+        const startHeight = wrapper.offsetHeight;
+        wrapper.style.overflow = 'hidden';
+        const anim = wrapper.animate(
+          [{ height: startHeight + 'px' }, { height: '0px' }],
+          { duration: 250, easing: 'ease' }
+        );
+        anim.onfinish = () => {
+          details.open = false;
+          wrapper.style.overflow = '';
+        };
+      });
+    });
+  </script>
 </body>
 </html>
