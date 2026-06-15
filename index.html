@@ -92,9 +92,29 @@
     details[open] > summary::after {
       transform: rotate(90deg);
     }
+    .attribution {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      font-size: 0.75rem;
+    }
+    .attribution a {
+      color: #999;
+      text-decoration: none;
+    }
+    .attribution a:hover {
+      text-decoration: underline;
+    }
     @media (max-width: 768px) {
       .content {
         width: 88%;
+      }
+      /* Not enough side margin to clear the text column: drop into normal flow. */
+      .attribution {
+        position: static;
+        display: block;
+        text-align: right;
+        margin-top: 3rem;
       }
     }
   </style>
@@ -190,6 +210,8 @@
 
     <!-- <br><br>
     <h2>Josephson effect</h2> -->
+
+    <div class="attribution"><a href="https://wdaochen.com/">human-generated text</a></div>
   </div>
   <script>
     document.querySelectorAll('details').forEach(details => {
